@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.kumuluzee.jnosql</groupId>
+    <artifactId>kumuluzee-jnosql-samples</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>graph-sample</module>
+    </modules>
+
+    <properties>
+        <maven.compile.targetLevel>11</maven.compile.targetLevel>
+        <maven.compile.sourceLevel>11</maven.compile.sourceLevel>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <kumuluzee.version>3.5.0</kumuluzee.version>
+        <neo4j-gremlin-bolt.version>0.3.1</neo4j-gremlin-bolt.version>
+        <kumuluzee-jnosql-graph.version>1.0.0-SNAPSHOT</kumuluzee-jnosql-graph.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.kumuluz.ee</groupId>
+                <artifactId>kumuluzee-bom</artifactId>
+                <version>${kumuluzee.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.kumuluz.ee.jnosql</groupId>
+                <artifactId>kumuluzee-jnosql-graph</artifactId>
+                <version>${kumuluzee-jnosql-graph.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
