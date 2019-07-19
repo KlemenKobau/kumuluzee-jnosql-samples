@@ -1,0 +1,21 @@
+kumuluzee:
+  name: kumuluzee-jnosql-graph
+  version: 1.0.0
+  env:
+    name: dev
+  server:
+    http:
+      port: 8080
+  jnosql:
+    graph:
+      gremlin.graph: com.steelbridgelabs.oss.neo4j.structure.Neo4JGraph
+
+      neo4j.graph.name: "test"
+      neo4j.identifier: "identifier"
+      neo4j.username: "neo4j"
+      neo4j.password: "1234"
+      neo4j.url: bolt://localhost:7687
+      neo4j.readonly: false
+      neo4j.vertexIdProvider: com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider
+      neo4j.edgeIdProvider: com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider
+      neo4j.propertyIdProvider: com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider
