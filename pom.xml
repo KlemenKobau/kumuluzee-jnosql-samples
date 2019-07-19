@@ -10,6 +10,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>graph-sample-neo4j-remote</module>
+        <module>graph-sample-janusgraph</module>
     </modules>
 
     <properties>
@@ -19,6 +20,7 @@
 
         <kumuluzee.version>3.5.0</kumuluzee.version>
         <neo4j-gremlin-bolt.version>0.3.1</neo4j-gremlin-bolt.version>
+        <janusgraph.version>0.4.0</janusgraph.version>
         <kumuluzee-jnosql-graph.version>1.0.0-SNAPSHOT</kumuluzee-jnosql-graph.version>
     </properties>
 

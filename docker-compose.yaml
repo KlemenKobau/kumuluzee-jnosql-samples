@@ -7,8 +7,12 @@ services:
       - 7687:7687
     image: neo4j:latest
     container_name: 'neo4j'
-
-
+  janusgraph:
+    restart: always
+    ports:
+      - 8182:8182
+    image: janusgraph/janusgraph:latest
+    container_name: 'janusgraph'
   mongo:
     container_name: 'mongodb'
     image: mongo

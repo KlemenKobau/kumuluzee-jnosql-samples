@@ -9,23 +9,27 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kumuluzee-graph-sample-neo4j-remote</artifactId>
+    <artifactId>graph-sample-janusgraph</artifactId>
 
     <dependencies>
-        <!--        <dependency>-->
-        <!--            <groupId>org.jnosql.diana</groupId>-->
-        <!--            <artifactId>mongodb-driver</artifactId>-->
-        <!--            <version>0.0.9</version>-->
-        <!--        </dependency>-->
-
+        <dependency>
+            <groupId>org.janusgraph</groupId>
+            <artifactId>janusgraph-core</artifactId>
+            <version>${janusgraph.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.janusgraph</groupId>
+            <artifactId>janusgraph-berkeleyje</artifactId>
+            <version>${janusgraph.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.janusgraph</groupId>
+            <artifactId>janusgraph-lucene</artifactId>
+            <version>${janusgraph.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.kumuluz.ee.jnosql</groupId>
             <artifactId>kumuluzee-jnosql-graph</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.steelbridgelabs.oss</groupId>
-            <artifactId>neo4j-gremlin-bolt</artifactId>
-            <version>${neo4j-gremlin-bolt.version}</version>
         </dependency>
         <dependency>
             <groupId>com.kumuluz.ee</groupId>
@@ -52,4 +56,5 @@
             <artifactId>kumuluzee-json-b-yasson</artifactId>
         </dependency>
     </dependencies>
+
 </project>
