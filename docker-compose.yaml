@@ -14,11 +14,19 @@ services:
     image: janusgraph/janusgraph:latest
     container_name: 'janusgraph'
   mongo:
-    container_name: 'mongodb'
-    image: mongo
+    restart: always
     ports:
       - 27017:27017
-    restart: always
+    image: mongo
+    container_name: 'mongodb'
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongo
       MONGO_INITDB_ROOT_PASSWORD: mongo
+
+  hazelcast:
+    restart: always
+    ports:
+      - 5701:5701
+    image: hazelcast/hazelcast:latest
+    container_name: 'hazelcast'
+
