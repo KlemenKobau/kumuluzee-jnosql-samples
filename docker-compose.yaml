@@ -17,12 +17,9 @@ services:
   mongo:
     restart: always
     ports:
-      - 27017:27017
+      - 10000:27017
     image: mongo
     container_name: 'mongodb'
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: mongo
-      MONGO_INITDB_ROOT_PASSWORD: mongo
 
   hazelcast:
     restart: always

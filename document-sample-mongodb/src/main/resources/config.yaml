@@ -1,0 +1,17 @@
+kumuluzee:
+  name: kumuluzee-jnosql-document
+  version: 1.0.0
+  env:
+    name: dev
+  server:
+    http:
+      port: 8080
+  jnosql:
+    document:
+      config-class-name: org.jnosql.diana.mongodb.document.MongoDBDocumentConfiguration
+
+      collection: 'developer'
+      #      mongodb.user: mongo
+      #      mongodb.password: mongo
+      #      mongodb.authentication.source: t
+      mongodb-server-host-1: localhost:10000
