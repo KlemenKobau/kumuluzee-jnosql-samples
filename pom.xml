@@ -12,6 +12,8 @@
         <module>graph-sample-neo4j-remote</module>
         <module>graph-sample-janusgraph</module>
         <module>keyvalue-sample-hazelcast</module>
+        <module>keyvalue-sample-redis</module>
+        <module>column-sample-cassandra</module>
     </modules>
 
     <properties>
@@ -26,6 +28,7 @@
 
         <kumuluzee-jnosql-graph.version>1.0.0-SNAPSHOT</kumuluzee-jnosql-graph.version>
         <kumuluzee-jnosql-key-value.version>1.0.0-SNAPSHOT</kumuluzee-jnosql-key-value.version>
+        <kumuluzee-jnosql-column.version>1.0.0-SNAPSHOT</kumuluzee-jnosql-column.version>
     </properties>
 
     <dependencies>
