@@ -22,7 +22,7 @@
         <kumuluzee.version>3.5.0</kumuluzee.version>
         <neo4j-gremlin-bolt.version>0.3.1</neo4j-gremlin-bolt.version>
         <janusgraph.version>0.4.0</janusgraph.version>
-        <hazelcast-diana.version>0.0.9</hazelcast-diana.version>
+        <diana.version>0.0.9</diana.version>
 
         <kumuluzee-jnosql-graph.version>1.0.0-SNAPSHOT</kumuluzee-jnosql-graph.version>
         <kumuluzee-jnosql-key-value.version>1.0.0-SNAPSHOT</kumuluzee-jnosql-key-value.version>

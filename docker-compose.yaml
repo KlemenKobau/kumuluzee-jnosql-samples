@@ -13,6 +13,7 @@ services:
       - 8182:8182
     image: janusgraph/janusgraph:latest
     container_name: 'janusgraph'
+
   mongo:
     restart: always
     ports:
@@ -29,4 +30,10 @@ services:
       - 5701:5701
     image: hazelcast/hazelcast:latest
     container_name: 'hazelcast'
+  redis:
+    restart: always
+    ports:
+      - 6379:6379
+    image: redis:latest
+    container_name: 'redis'
 

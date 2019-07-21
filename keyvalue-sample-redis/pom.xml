@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kumuluzee-jnosql-key-value-sample-hazelcast</artifactId>
+    <artifactId>kumuluzee-keyvalue-sample-redis</artifactId>
 
     <dependencies>
         <dependency>
@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>org.jnosql.diana</groupId>
-            <artifactId>hazelcast-driver</artifactId>
+            <artifactId>redis-driver</artifactId>
             <version>${diana.version}</version>
         </dependency>
         <dependency>

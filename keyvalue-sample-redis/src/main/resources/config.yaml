@@ -1,0 +1,11 @@
+kumuluzee:
+  name: kumuluzee-jnosql-graph
+  version: 1.0.0
+  env:
+    name: dev
+  server:
+    http:
+      port: 8080
+  jnosql:
+    key-value:
+      config-class-name: org.jnosql.diana.redis.key.RedisConfiguration
