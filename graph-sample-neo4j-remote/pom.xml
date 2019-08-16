@@ -12,15 +12,19 @@
     <artifactId>kumuluzee-graph-sample-neo4j-remote</artifactId>
 
     <dependencies>
-        <!--        <dependency>-->
-        <!--            <groupId>org.jnosql.diana</groupId>-->
-        <!--            <artifactId>mongodb-driver</artifactId>-->
-        <!--            <version>0.0.9</version>-->
-        <!--        </dependency>-->
-
         <dependency>
             <groupId>com.kumuluz.ee.jnosql</groupId>
             <artifactId>kumuluzee-jnosql-graph</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tinkerpop</groupId>
+            <artifactId>gremlin-core</artifactId>
+            <version>${tinkerpop.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tinkerpop</groupId>
+            <artifactId>gremlin-groovy</artifactId>
+            <version>${tinkerpop.version}</version>
         </dependency>
         <dependency>
             <groupId>com.steelbridgelabs.oss</groupId>

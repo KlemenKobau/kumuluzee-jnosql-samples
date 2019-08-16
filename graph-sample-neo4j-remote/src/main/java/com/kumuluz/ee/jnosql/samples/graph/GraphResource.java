@@ -8,6 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -20,6 +21,14 @@ public class GraphResource {
 
 	@GET
 	public Response getAllNodes() {
+		List<Node> allNodes = graphBean.getAll();
+		long count = graphBean.count();
+		return Response.ok(count).build();
+	}
+
+	@GET
+	@Path("insert-test")
+	public Response insertNode() {
 		Node node = new Node();
 		node.setName("test");
 		Node res = graphBean.insert(node);

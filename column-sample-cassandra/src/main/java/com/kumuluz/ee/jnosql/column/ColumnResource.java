@@ -32,4 +32,11 @@ public class ColumnResource {
 		Person saved = columnBean.savePerson(john);
 		return Response.ok(saved).build();
 	}
+
+	@GET
+	@Path("count")
+	public Response countEntities() {
+		long count = columnBean.count();
+		return Response.ok(count).build();
+	}
 }

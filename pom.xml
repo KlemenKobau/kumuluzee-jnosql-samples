@@ -26,6 +26,7 @@
         <neo4j-gremlin-bolt.version>0.3.1</neo4j-gremlin-bolt.version>
         <janusgraph.version>0.4.0</janusgraph.version>
         <diana.version>0.0.9</diana.version>
+        <tinkerpop.version>3.4.3</tinkerpop.version>
 
         <kumuluzee-jnosql-graph.version>1.0.0-SNAPSHOT</kumuluzee-jnosql-graph.version>
         <kumuluzee-jnosql-key-value.version>1.0.0-SNAPSHOT</kumuluzee-jnosql-key-value.version>
