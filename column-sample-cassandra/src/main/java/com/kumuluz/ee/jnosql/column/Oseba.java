@@ -8,13 +8,13 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Person implements Serializable {
+public class Oseba implements Serializable {
 
 	@Id("id")
 	private Long id;
 
 	@Column
-	private String name;
+	private String ime;
 
 	@Column
 	private List<String> phones;
@@ -29,12 +29,12 @@ public class Person implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getIme() {
+		return ime;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setIme(String ime) {
+		this.ime = ime;
 	}
 
 	public List<String> getPhones() {

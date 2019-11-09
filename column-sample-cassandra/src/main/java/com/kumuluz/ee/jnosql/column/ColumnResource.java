@@ -28,11 +28,11 @@ public class ColumnResource {
 
 	@GET
 	public Response putJohn() {
-		Person john = new Person();
-		john.setName("john");
+		Oseba john = new Oseba();
+		john.setIme("john");
 		john.setId((long) 1);
 		john.setPhones(List.of("phone1"));
-		Person saved = columnBean.savePerson(john);
+		Oseba saved = columnBean.savePerson(john);
 		return Response.ok(saved).build();
 	}
 

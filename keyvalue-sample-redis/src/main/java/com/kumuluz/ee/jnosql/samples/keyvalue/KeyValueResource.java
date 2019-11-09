@@ -18,8 +18,7 @@ public class KeyValueResource {
 	@GET
 	@Path("{id}")
 	public Response getJohn(@PathParam("id") long id) {
-		Person john = keyValueBean.getPersonById(id);
-		return Response.ok(john).build();
+		return Response.ok().build();
 	}
 
 	@GET
@@ -27,7 +26,6 @@ public class KeyValueResource {
 		Person john = new Person();
 		john.setName("john");
 		john.setId((long) 1);
-		Person saved = keyValueBean.savePerson(john);
-		return Response.ok(saved).build();
+		return Response.ok().build();
 	}
 }
