@@ -1,41 +1,35 @@
 version: '3.7'
 services:
   neo4j:
-    restart: always
     ports:
       - 7474:7474
       - 7687:7687
     image: neo4j:latest
     container_name: 'neo4j'
   janusgraph:
-    restart: always
     ports:
       - 8182:8182
     image: janusgraph/janusgraph:latest
     container_name: 'janusgraph'
 
   mongo:
-    restart: always
     ports:
       - 10000:27017
     image: mongo
     container_name: 'mongodb'
 
   hazelcast:
-    restart: always
     ports:
       - 5701:5701
     image: hazelcast/hazelcast:latest
     container_name: 'hazelcast'
   redis:
-    restart: always
     ports:
       - 6379:6379
     image: redis:latest
     container_name: 'redis'
 
   cassandra:
-    restart: always
     ports:
       - 7000:7000
       - 7001:7001
