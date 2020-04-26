@@ -16,10 +16,6 @@ public class GraphBean {
 	@Inject
 	private GraphTemplate template;
 
-//	@Inject
-//	@DatabaseLogic(databaseType = DatabaseType.GRAPH)
-//	private DatabaseTemplate template;
-
 	@Inject
 	private Graph graph;
 
@@ -38,8 +34,6 @@ public class GraphBean {
 	}
 
 	public long count() {
-//		return nodeRepository.count();
-		NodeRepository repository = CDI.current().select(NodeRepository.class).get();
-		return repository.count();
+		return nodeRepository.count();
 	}
 }

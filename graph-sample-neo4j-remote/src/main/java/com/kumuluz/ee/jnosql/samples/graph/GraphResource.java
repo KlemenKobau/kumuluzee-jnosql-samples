@@ -22,14 +22,19 @@ public class GraphResource {
 	@GET
 	public Response getAllNodes() {
 		List<Node> allNodes = graphBean.getAll();
-		long count = graphBean.count();
-		return Response.ok(count).build();
+		return Response.ok(allNodes).build();
+	}
+
+	@GET
+	public Response getNodeCount() {
+		return Response.ok(graphBean.count()).build();
 	}
 
 	@GET
 	@Path("insert-test")
 	public Response insertNode() {
 		Node node = new Node();
+		node.setId(0L);
 		node.setName("test");
 		Node res = graphBean.insert(node);
 		return Response.ok(res).build();

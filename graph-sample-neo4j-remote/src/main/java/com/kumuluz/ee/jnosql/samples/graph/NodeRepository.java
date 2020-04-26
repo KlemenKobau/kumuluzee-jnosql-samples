@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface NodeRepository extends Repository<Node, Long> {
 
-	@Query("g.v(0);")
+	@Query("g.V('0');")
 	public List<Node> getAllNodes();
 }
