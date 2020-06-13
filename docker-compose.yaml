@@ -9,7 +9,7 @@ services:
   janusgraph:
     ports:
       - 8182:8182
-    image: janusgraph/janusgraph:latest
+    image: janusgraph/janusgraph:0.5.2
     container_name: 'janusgraph'
 
   mongo:
