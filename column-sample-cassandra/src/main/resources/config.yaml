@@ -14,4 +14,4 @@ kumuluzee:
       cassandra-threads-number: 4
       key-space: 'developers'
       cassandra-query-1: "CREATE KEYSPACE IF NOT EXISTS developers WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3};"
-      cassandra-query-2: "CREATE COLUMNFAMILY IF NOT EXISTS developers.Oseba (id bigint PRIMARY KEY, ime text, phones list<text>);"
+      cassandra-query-2: "CREATE COLUMNFAMILY IF NOT EXISTS developers.Person (id bigint PRIMARY KEY, name text, phones list<text>);"

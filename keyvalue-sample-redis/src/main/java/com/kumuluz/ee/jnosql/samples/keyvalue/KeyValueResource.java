@@ -47,10 +47,10 @@ public class KeyValueResource {
 		bob.setId(2L);
 		bob.setName("bob");
 
-		List<Person> seznamLjudi = new LinkedList<>();
-		seznamLjudi.add(john);
-		seznamLjudi.add(bob);
-		keyValueBean.addPeople(seznamLjudi);
+		List<Person> personList = new LinkedList<>();
+		personList.add(john);
+		personList.add(bob);
+		keyValueBean.addPeople(personList);
 
 		return Response.ok().build();
 	}
