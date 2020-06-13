@@ -26,6 +26,7 @@ public class GraphResource {
 	}
 
 	@GET
+	@Path("count")
 	public Response getNodeCount() {
 		return Response.ok(graphBean.count()).build();
 	}
