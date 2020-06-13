@@ -26,7 +26,7 @@ public class KeyValueResource {
 	public Response putJohn() {
 		Person john = new Person();
 		john.setName("john");
-		john.setId((long) 1);
+		john.setId(1L);
 		Person saved = keyValueBean.savePerson(john);
 		return Response.ok(saved).build();
 	}
