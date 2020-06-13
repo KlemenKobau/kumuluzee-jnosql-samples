@@ -35,7 +35,6 @@ public class GraphResource {
 	@Path("insert-test")
 	public Response insertNode() {
 		Node node = new Node();
-		node.setId(0L);
 		node.setName("test");
 		Node res = graphBean.insert(node);
 		return Response.ok(res).build();
