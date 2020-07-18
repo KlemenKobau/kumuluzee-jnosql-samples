@@ -3,7 +3,7 @@
 > as its database
 
 The objective of this sample is to use KumuluzEE JNoSQL
-to connect to Janusgraph and perform basic operations over it.
+to connect to Redis and perform basic operations over it.
 The tutorial will guide you through all the necessary steps.
 You will add KumuluzEE dependencies into pom.xml. 
 You will prepare the configuration for connecting with the database
@@ -35,7 +35,7 @@ In order to run this example you will need the following:
         ```
 ## Prerequisites
 
-To run this sample you will need a running Janusgraph instance.
+To run this sample you will need a running Redis instance.
 You can run it by using the docker compose in the parent directory.
 
 ## Usage
@@ -44,7 +44,7 @@ The example uses maven to build and run the microservice.
 1. Build the sample using maven:
 
     ```bash
-    $ cd kumuluzee-jnosql-samples/graph-sample-janusgraph
+    $ cd kumuluzee-jnosql-samples/keyvalue-sample-redis
     $ mvn clean package
    
 3. Run the sample:
@@ -70,7 +70,7 @@ The example uses maven to build and run the microservice.
    java -cp target/classes;target/dependency/* com.kumuluz.ee.EeApplication
   
  The application/service can be accessed on the following URL:
- * JAX-RS REST resource, operations over Janusgraph - http://localhost:8080/v1/graph
+ * JAX-RS REST resource, operations over Neo4J - http://localhost:8080/v1/key-value
  
 To shut down the example simply stop the processes in the foreground.
 
@@ -78,7 +78,9 @@ To shut down the example simply stop the processes in the foreground.
 
 This tutorial will guide you through the steps required to create a service, which uses the KumuluzEE JNoSQL extension.
 We will develop a simple REST service with the following resources:
-* GET http://localhost:8080/v1/graph - Inserting the initial node and getting it
+* GET http://localhost:8080/v1/key-value/{id} - Getting a person by id
+* DELETE http://localhost:8080/v1/key-value/{id} - Deleting a person by id
+* GET http://localhost:8080/v1/key-value - Putting the initial person in the database
 
 We will follow these steps:
 * Create a Maven project in the IDE of your choice (Eclipse, IntelliJ, etc.)
@@ -105,28 +107,19 @@ Add the KumuluzEE BOM module dependency to your `pom.xml` file:
 </dependencyManagement>
 ```
 
-Add the `kumuluzee-jnosql-graph`, `janusgraph-core`, `janusgraph-berkeleyje`, `janusgraph-lucene`, `kumuluzee-core`, `kumuluzee-servlet-jetty`, `kumuluzee-jax-rs-jersey`
+Add the `kumuluzee-jnosql-key-value`, `redis-driver`, `kumuluzee-core`, `kumuluzee-servlet-jetty`, `kumuluzee-jax-rs-jersey`
  `kumuluzee-cdi-weld`, `kumuluzee-json-p-jsonp` and `kumuluzee-json-b-yasson` dependencies:
 ```xml
 <dependencies>
     <dependency>
-        <groupId>org.janusgraph</groupId>
-        <artifactId>janusgraph-core</artifactId>
-        <version>${janusgraph.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.janusgraph</groupId>
-        <artifactId>janusgraph-berkeleyje</artifactId>
-        <version>${janusgraph.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.janusgraph</groupId>
-        <artifactId>janusgraph-lucene</artifactId>
-        <version>${janusgraph.version}</version>
-    </dependency>
-    <dependency>
         <groupId>com.kumuluz.ee.jnosql</groupId>
-        <artifactId>kumuluzee-jnosql-graph</artifactId>
+        <artifactId>kumuluzee-jnosql-key-value</artifactId>
+        <version>${kumuluzee-jnosql-key-value.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.jnosql.diana</groupId>
+        <artifactId>redis-driver</artifactId>
+        <version>${diana.version}</version>
     </dependency>
     <dependency>
         <groupId>com.kumuluz.ee</groupId>
@@ -208,7 +201,7 @@ for example with `@ApplicationPath` annotation:
 
 ```java
 @ApplicationPath("v1")
-public class GraphApplication extends Application {
+public class KeyValueApplication extends Application {
 }
 ```
 
@@ -217,20 +210,47 @@ Implement JAX-RS resource, which we will use as the REST endpoint:
 ```java
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Path("graph")
+@Path("key-value")
 @ApplicationScoped
-public class GraphResource {
+public class KeyValueResource {
 
 	@Inject
-	private GraphBean graphBean;
+	private KeyValueBean keyValueBean;
 
 	@GET
-	public Response getAllNodes() {
-		Node node = new Node();
-		node.setName("test");
-		Node res = graphBean.insert(node);
-		Long count = graphBean.getAll();
-		System.err.println(count);
+	@Path("{id}")
+	public Response getById(@PathParam("id") Long id) {
+		Optional<Person> personOptional = keyValueBean.findById(id);
+
+		if (personOptional.isPresent()) {
+			return Response.ok(personOptional.get()).build();
+		} else {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
+	}
+
+	@DELETE
+	@Path("{id}")
+	public Response deleteById(@PathParam("id") Long id) {
+		keyValueBean.deleteById(id);
+		return Response.noContent().build();
+	}
+
+	@GET
+	public Response putInitial() {
+		Person john = new Person();
+		john.setId(1L);
+		john.setName("john");
+
+		Person bob = new Person();
+		bob.setId(2L);
+		bob.setName("bob");
+
+		List<Person> personList = new LinkedList<>();
+		personList.add(john);
+		personList.add(bob);
+		keyValueBean.addPeople(personList);
+
 		return Response.ok().build();
 	}
 }
@@ -240,30 +260,35 @@ We implement the bean with the database logic.
 
 ```java
 @ApplicationScoped
-public class GraphBean {
+public class KeyValueBean {
 
 	@Inject
-	private GraphTemplate template;
+	private KeyValueTemplate keyValue;
 
 	@Inject
-	private Graph graph;
+	@Database(DatabaseType.KEY_VALUE)
+	private PeopleRepository peopleRepository;
 
-	public Node insert(Node node) {
-		Node res = template.insert(node);
-		graph.tx().commit();
-		return res;
+	public Optional<Person> findById(Long id){
+		return peopleRepository.findById(id);
 	}
 
-	public Long getAll() {
-		return template.count(Node.class);
+	public void addPeople(Collection<Person> people){
+		keyValue.put(people);
 	}
 
+	public void deleteById(Long id) {
+		peopleRepository.deleteById(id);
+	}
+
+	public void useStatement(Long id) {
+		PreparedStatement statement = keyValue.prepare("remove @id", Person.class);
+		statement.bind("id", id);
+		statement.getSingleResult();
+	}
 }
 ```
-
-Here we inject a repository with basic operations.
-These operations can be extended by defining functions based on the specifications from the JNoSQL documentation.
-We also inject a template class, which offers more basic operations, including using the query language.
+We inject a template class, which offers more basic operations, including using the query language.
 
 ### Build the microservice and run it
 

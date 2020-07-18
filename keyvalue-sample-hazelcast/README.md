@@ -70,7 +70,7 @@ The example uses maven to build and run the microservice.
    java -cp target/classes;target/dependency/* com.kumuluz.ee.EeApplication
   
  The application/service can be accessed on the following URL:
- * JAX-RS REST resource, operations over Neo4J - http://localhost:8080/v1/graph
+ * JAX-RS REST resource, operations over Neo4J - http://localhost:8080/v1/key-value
  
 To shut down the example simply stop the processes in the foreground.
 

@@ -111,41 +111,41 @@ Add the `kumuluzee-jnosql-column`, `cassandra-driver`, `kumuluzee-core`, `kumulu
  `kumuluzee-cdi-weld`, `kumuluzee-json-p-jsonp` and `kumuluzee-json-b-yasson` dependencies:
 ```xml
 <dependencies>
-        <dependency>
-            <groupId>com.kumuluz.ee.jnosql</groupId>
-            <artifactId>kumuluzee-jnosql-column</artifactId>
-            <version>${kumuluzee-jnosql-column.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jnosql.diana</groupId>
-            <artifactId>cassandra-driver</artifactId>
-            <version>${diana.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee</groupId>
-            <artifactId>kumuluzee-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee</groupId>
-            <artifactId>kumuluzee-servlet-jetty</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee</groupId>
-            <artifactId>kumuluzee-jax-rs-jersey</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee</groupId>
-            <artifactId>kumuluzee-cdi-weld</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee</groupId>
-            <artifactId>kumuluzee-json-p-jsonp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee</groupId>
-            <artifactId>kumuluzee-json-b-yasson</artifactId>
-        </dependency>
-    </dependencies>
+    <dependency>
+        <groupId>com.kumuluz.ee.jnosql</groupId>
+        <artifactId>kumuluzee-jnosql-column</artifactId>
+        <version>${kumuluzee-jnosql-column.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.jnosql.diana</groupId>
+        <artifactId>cassandra-driver</artifactId>
+        <version>${diana.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.kumuluz.ee</groupId>
+        <artifactId>kumuluzee-core</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.kumuluz.ee</groupId>
+        <artifactId>kumuluzee-servlet-jetty</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.kumuluz.ee</groupId>
+        <artifactId>kumuluzee-jax-rs-jersey</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.kumuluz.ee</groupId>
+        <artifactId>kumuluzee-cdi-weld</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.kumuluz.ee</groupId>
+        <artifactId>kumuluzee-json-p-jsonp</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.kumuluz.ee</groupId>
+        <artifactId>kumuluzee-json-b-yasson</artifactId>
+    </dependency>
+</dependencies>
 ```
 
 Add the `kumuluzee-maven-plugin` build plugin to package microservice as uber-jar:
