@@ -201,6 +201,49 @@ or exploded:
 </build>
 ```
 
+### Write configuration
+We have to configure the database connection, by adding the configuration inside **config.yaml**, which is used
+for all KumuluzEE configurations.
+
+Unfortunately, JNoSQL still doesn't provide sufficient documentation for the configuration.
+
+The required fields for Neo4J are not specified by JNOSQL, but these seem to be the only ones needed.
+* neo4j-graph-name
+* neo4j-identifier
+* neo4j-username
+* neo4j-password
+* neo4j-url
+* neo4j-readonly
+* neo4j-vertexIdProvider
+* neo4j-edgeIdProvider
+* neo4j-propertyIdProvider
+
+The configuration we will be using will be:
+```yaml
+kumuluzee:
+  name: kumuluzee-jnosql-graph
+  version: 1.0.0
+  env:
+    name: dev
+  server:
+    http:
+      port: 8080
+  jnosql:
+    graph:
+      gremlin-graph: com.steelbridgelabs.oss.neo4j.structure.Neo4JGraph
+
+      neo4j-graph-name: "test"
+      neo4j-identifier: "identifier"
+      neo4j-username: "neo4j"
+      neo4j-password: "1234"
+      neo4j-url: bolt://localhost:7687
+      neo4j-readonly: false
+      neo4j-vertexIdProvider: com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider
+      neo4j-edgeIdProvider: com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider
+      neo4j-propertyIdProvider: com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider
+```
+
+The **gremlin.graph** configuration is used to specify the configuration class of the database.
 
 ### Implement the servlet
 

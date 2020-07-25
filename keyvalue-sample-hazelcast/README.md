@@ -191,6 +191,33 @@ or exploded:
 </build>
 ```
 
+### Write configuration
+We have to configure the database connection, by adding the configuration inside **config.yaml**, which is used
+for all KumuluzEE configurations.
+
+Unfortunately, JNoSQL still doesn't provide sufficient documentation for the configuration, but we can read it from the
+HazelcastKeyValueConfiguration class, provided by the dependencies.
+
+We can see that the provided fields are: 
+* hazelcast.instanceName: the instance name
+* hazelcast.host: as prefix to n host where n is the number of host, eg: hazelcast-host-1: host
+
+The configuration we will be using will be:
+```yaml
+kumuluzee:
+  name: kumuluzee-jnosql-key-value
+  version: 1.0.0
+  env:
+    name: dev
+  server:
+    http:
+      port: 8080
+  jnosql:
+    key-value:
+      config-class-name: org.jnosql.diana.hazelcast.key.HazelcastKeyValueConfiguration
+```
+
+The **config-class-name** configuration is used to specify the configuration class of the database.
 
 ### Implement the servlet
 

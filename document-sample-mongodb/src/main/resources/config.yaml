@@ -11,7 +11,4 @@ kumuluzee:
       config-class-name: org.jnosql.diana.mongodb.document.MongoDBDocumentConfiguration
 
       collection: 'developer'
-      #      mongodb.user: mongo
-      #      mongodb.password: mongo
-      #      mongodb.authentication.source: t
       mongodb-server-host-1: localhost:10000

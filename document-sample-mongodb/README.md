@@ -191,6 +191,36 @@ or exploded:
 </build>
 ```
 
+### Write configuration
+We have to configure the database connection, by adding the configuration inside **config.yaml**, which is used
+for all KumuluzEE configurations.
+
+Unfortunately, JNoSQL still doesn't provide sufficient documentation for the configuration, but we can read it from the
+MongoDBDocumentConfiguration class, provided by the dependencies.
+
+We can see that the provided fields are: 
+* mongodb.server.host.: as prefix to add host client, eg: mongodb.server.host.1=host1, mongodb.server.host.2= host2
+
+The configuration we will be using will be:
+```yaml
+kumuluzee:
+  name: kumuluzee-jnosql-document
+  version: 1.0.0
+  env:
+    name: dev
+  server:
+    http:
+      port: 8080
+  jnosql:
+    document:
+      config-class-name: org.jnosql.diana.mongodb.document.MongoDBDocumentConfiguration
+
+      collection: 'developer'
+      mongodb-server-host-1: localhost:10000
+```
+
+The **config-class-name** configuration is used to specify the configuration class of the database and
+the **collection** configuration is used to set up the collection (tables in SQL terms).
 
 ### Implement the servlet
 

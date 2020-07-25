@@ -192,6 +192,46 @@ or exploded:
 </build>
 ```
 
+### Write configuration
+We have to configure the database connection, by adding the configuration inside **config.yaml**, which is used
+for all KumuluzEE configurations.
+
+Unfortunately, JNoSQL still doesn't provide sufficient documentation for the configuration, but we can read it from the
+CassandraConfiguration class, provided by the dependencies.
+
+We can see that the provided fields are: 
+* cassandra.host-: The Cassandra host as prefix, you can set how much you want just setting the number order,
+eg: cassandra.host-1 = host, cassandra.host-2 = host2</p>
+* cassandra.query.: The Cassandra query to run when an instance is started, you can set how much you want just
+by setting the order number, eg: cassandra.query.1=cql, cassandra.query.2=cql2...
+* cassandra.threads.number: The number of executor to run on Async process, if it isn't defined that will use the number of processor
+* cassandra.ssl: Define ssl, the default value is false
+* cassandra.metrics: enable metrics, the default value is true
+* cassandra.jmx: enable JMX, the default value is true
+
+The configuration we will be using will be:
+```yaml
+kumuluzee:
+  name: kumuluzee-jnosql-column
+  version: 1.0.0
+  env:
+    name: dev
+  server:
+    http:
+      port: 8080
+  jnosql: <-- our database configuration
+    column:
+      config-class-name: org.jnosql.diana.cassandra.column.CassandraConfiguration
+
+      cassandra-host-1: localhost
+      cassandra-threads-number: 4
+      key-space: 'developers'
+      cassandra-query-1: "CREATE KEYSPACE IF NOT EXISTS developers WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3};"
+      cassandra-query-2: "CREATE COLUMNFAMILY IF NOT EXISTS developers.Person (id bigint PRIMARY KEY, name text, phones list<text>);"
+```
+
+The **config-class-name** configuration is used to specify the configuration class of the database and
+the **key-space** configuration is used to set up the key space (something like the database name in SQL terms).
 
 ### Implement the servlet
 

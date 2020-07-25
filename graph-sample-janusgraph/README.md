@@ -199,6 +199,39 @@ or exploded:
 </build>
 ```
 
+### Write configuration
+We have to configure the database connection, by adding the configuration inside **config.yaml**, which is used
+for all KumuluzEE configurations.
+
+Unfortunately, JNoSQL still doesn't provide sufficient documentation for the configuration.
+
+The required fields for JanusGraph are not specified by JNOSQL, but these seem to be the only ones needed.
+* storage.backend
+* storage.directory
+* index.search.backend
+* index.search.directory
+
+The configuration we will be using will be:
+```yaml
+kumuluzee:
+  name: kumuluzee-jnosql-graph
+  version: 1.0.0
+  env:
+    name: dev
+  server:
+    http:
+      port: 8080
+  jnosql:
+    graph:
+      gremlin.graph: org.janusgraph.core.JanusGraphFactory
+
+      storage.backend: berkeleyje
+      storage.directory: ../target/jnosql/berkeleyje
+      index.search.backend: lucene
+      index.search.directory: ../target/jnosql/lucene
+```
+
+The **gremlin.graph** configuration is used to specify the configuration class of the database.
 
 ### Implement the servlet
 

@@ -1,5 +1,5 @@
 kumuluzee:
-  name: kumuluzee-jnosql-graph
+  name: kumuluzee-jnosql-key-value
   version: 1.0.0
   env:
     name: dev

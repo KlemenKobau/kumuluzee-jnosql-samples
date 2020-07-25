@@ -192,6 +192,41 @@ or exploded:
 </build>
 ```
 
+### Write configuration
+We have to configure the database connection, by adding the configuration inside **config.yaml**, which is used
+for all KumuluzEE configurations.
+
+Unfortunately, JNoSQL still doesn't provide sufficient documentation for the configuration, but we can read it from the
+RedisConfiguration class, provided by the dependencies.
+
+We can see that the provided fields are: 
+* redis.host: the host client
+* redis.port: the port, the default value 6379
+* redis.timeout: the redis timeout, the default value 2000 on milis
+* redis.password: the password
+* redis.database: the redis database number, the default value is 0
+* redis.clientName: the redis client name
+* redis.max.total: The max number of thread to {@link JedisPoolConfig}, the default value 1000
+* redis.max.idle: The max idle {@link JedisPoolConfig}, the default value 10
+* redis.min.idle: The min idle {@link JedisPoolConfig}, the default value 1
+* redis.max.wait.millis: The max wait on millis on {@link JedisPoolConfig}, the default value 3000
+
+The configuration we will be using will be:
+```yaml
+kumuluzee:
+  name: kumuluzee-jnosql-key-value
+  version: 1.0.0
+  env:
+    name: dev
+  server:
+    http:
+      port: 8080
+  jnosql:
+    key-value:
+      config-class-name: org.jnosql.diana.redis.key.RedisConfiguration
+```
+
+The **config-class-name** configuration is used to specify the configuration class of the database.
 
 ### Implement the servlet
 
